@@ -1,5 +1,7 @@
 const queries = require("../prisma/queries");
+//generates a short unique string which will be used as short URL
 const short = require("short-uuid");
+//validates if a url is valid
 const isUrl = require("is-url");
 //function to validate if a url is valid
 const isValid = (url) => {
@@ -27,4 +29,13 @@ const postSubmitLinks = async (req, res) => {
     res.redirect("/submitLinks");
   }
 };
-module.exports = { postGenerateLinks, postSubmitLinks };
+const getShortURL = async (req, res) => {
+  const link = await queries.findLinkWhereShortURL(req.params.shortURL);
+  if (link) {
+    await queries.updateClicks(link);
+    res.redirect(link.fullURL);
+  } else {
+    res.redirect("/");
+  }
+};
+module.exports = { postGenerateLinks, postSubmitLinks, getShortURL };

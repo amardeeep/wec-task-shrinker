@@ -14,6 +14,7 @@ homeRouter.get("/generateLinks", (req, res) => {
 homeRouter.get("/submitLinks", (req, res) => {
   res.render("submitLinks");
 });
+homeRouter.get("/:shortURL", controllers.getShortURL);
 homeRouter.post("/submitLinks", controllers.postSubmitLinks);
 homeRouter.post("/generateLinks", controllers.postGenerateLinks);
 module.exports = { homeRouter };

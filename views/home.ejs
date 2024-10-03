@@ -11,26 +11,18 @@
     <div class="shortenURL">
       <a href="/generateLinks">Generate a Short URL.</a>
       <a href="/submitLinks">Add Custom short URL.</a>
-      <!-- <form action="submitLinks" method="post">
-        <label for="fullURL">Full URL :</label>
-        <input type="text" name="fullURL" id="fullURL" />
-        <label for="shortURL">Short URL :</label>
-        <input type="text" name="shortURL" id="shortURL" />
-        <button type="submit">Submit</button>
-      </form>
-      <form action="generateLinks">
-        <label for="fullURL">Full URL :</label>
-        <input type="text" name="fullURL" id="fullURL" />
-        <button type="button">Generate</button>
-      </form> -->
     </div>
     <div class="links">
       <%if(links){ %> LINKS :
       <ul>
         <% for(let link of links){ %>
         <li>
-          <div class="full"><%=link.fullURL%></div>
-          <div class="short"><%=link.shortURL%></div>
+          <div class="full">
+            <a href="<%=link.fullURL%>"><%=link.fullURL%></a>
+          </div>
+          <div class="short">
+            <a href="<%=link.shortURL%>"><%=link.shortURL%></a>
+          </div>
           <div class="clicks"><%=link.clicks%></div>
         </li>
         <% } %>
