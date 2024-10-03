@@ -18,7 +18,6 @@ model User {
   userName String @unique
   fullName String
   password String
-  links    Link[]
 }
 
 model Link {
@@ -26,6 +25,4 @@ model Link {
   fullURL  String
   shortURL String
   clicks   Int    @default(0)
-  user     User   @relation(fields: [user_id], references: [id])
-  user_id  Int
 }

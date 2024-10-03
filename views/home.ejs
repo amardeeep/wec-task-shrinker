@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <%if(user){%>
+    <div class="greetings"></div>
+    <div class="shortenURL">
+      <form action="links" method="post">
+        <label for="fullURL">Full URL :</label>
+        <input type="text" name="fullURL" id="fullURL" />
+        <label for="shortURL">Short URL :</label>
+        <input type="text" name="shortURL" id="shortURL" />
+        <div class="buttons">
+          <button type="submit">Submit</button> or Generate a random shortened
+          fullURL
+          <button type="button">Generate</button>
+        </div>
+      </form>
+    </div>
+    <div class="links">
+      <%if(links){ %>
+      <ul>
+        <% for(let link of links){ %>
+        <li>
+          <div class="full"><%=link.fullURL%></div>
+          <div class="short"><%=link.shortURL%></div>
+          <div class="clicks"><%=link.clicks%></div>
+        </li>
+        <% } %>
+      </ul>
+      <% } %>
+    </div>
+    <%}else{%>
+    <div class="nav"></div>
+    <div class="homeContent"></div>
+    <div class="footer"></div>
+    <%}%>
+  </body>
+</html>
