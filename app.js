@@ -1,6 +1,7 @@
 //import all the depndencies here
 const express = require("express");
 require("dotenv").config();
+
 const path = require("node:path");
 const { homeRouter } = require("./routes/homeRouter");
 

@@ -15,10 +15,12 @@
     "express": "^4.21.0",
     "express-session": "^1.18.0",
     "express-validator": "^7.2.0",
+    "nanoid": "^5.0.7",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "pg": "^8.13.0",
-    "prisma": "^5.20.0"
+    "prisma": "^5.20.0",
+    "short-uuid": "^5.2.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"
