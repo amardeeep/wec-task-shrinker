@@ -6,6 +6,13 @@
     <title>Submit A Short URL</title>
   </head>
   <body>
+    <% if(errors) {%>
+    <ul>
+      <% for(let error of errors) {%>
+      <li><%=error.msg %></li>
+      <% } %>
+    </ul>
+    <% } %>
     <form action="/submitLinks" method="post">
       <label for="fullURL">Full URL :</label>
       <input type="text" name="fullURL" id="fullURL" />

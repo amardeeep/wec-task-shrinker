@@ -9,10 +9,10 @@ homeRouter.get("/", async (req, res) => {
   res.render("home", { links, user });
 });
 homeRouter.get("/generateLinks", (req, res) => {
-  res.render("generateLinks");
+  res.render("generateLinks", { errors: null });
 });
 homeRouter.get("/submitLinks", (req, res) => {
-  res.render("submitLinks");
+  res.render("submitLinks", { errors: null });
 });
 homeRouter.get("/:shortURL", controllers.getShortURL);
 homeRouter.post("/submitLinks", controllers.postSubmitLinks);
