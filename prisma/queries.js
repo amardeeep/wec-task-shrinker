@@ -48,10 +48,18 @@ const updateClicks = async (link) => {
     },
   });
 };
+const deleteLink = async (id) => {
+  await prisma.link.delete({
+    where: {
+      id: parseInt(id),
+    },
+  });
+};
 module.exports = {
   createLinks,
   readLinks,
   findLinkWhereShortURL,
   findLinkWhereFullURL,
   updateClicks,
+  deleteLink,
 };

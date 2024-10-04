@@ -10,8 +10,8 @@ const isValid = (url) => {
 };
 const isEmpty = "can not be empty.";
 const validateURL = [
-  body("fullURL").trim().not().isEmpty().withMessage(`fullURL ${isEmpty}`),
-  body("shortURL").trim().not().isEmpty().withMessage(`shortURl ${isEmpty}`),
+  body("fullURL").trim().not().isEmpty().withMessage(`Full URL ${isEmpty}`),
+  body("shortURL").trim().not().isEmpty().withMessage(`Short URL ${isEmpty}`),
 ];
 const postGenerateLinks = [
   validateURL,
@@ -20,12 +20,15 @@ const postGenerateLinks = [
     if (!errors.isEmpty()) {
       return res
         .status(400)
-        .render("generateLinks", { errors: errors.array() });
+        .render("generateLinks", { errors: errors.array(), error: null });
     }
     const fullURL = req.body.fullURL;
     const link = await queries.findLinkWhereFullURL(fullURL);
     if (link) {
-      res.render("duplicateURL");
+      res.render("generateLinks", {
+        errors: null,
+        error: "This Full URL already exists.",
+      });
     } else {
       if (isValid(fullURL)) {
         let shortURL = short.generate();
@@ -38,7 +41,7 @@ const postGenerateLinks = [
         res.redirect("/");
       } else {
         //return invalid url error
-        res.render("invalidURL");
+        res.render("generateLinks", { errors: null, error: "Invalid URL" });
       }
     }
   },
@@ -48,25 +51,35 @@ const postSubmitLinks = [
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).render("submitLinks", { errors: errors.array() });
+      return res
+        .status(400)
+        .render("submitLinks", { errors: errors.array(), error: null });
     }
     const fullURL = req.body.fullURL;
     const link = await queries.findLinkWhereFullURL(fullURL);
     if (link) {
-      res.render("duplicateURL");
+      // res.render("duplicateURL");
+      res.render("submitLinks", {
+        error: "This Full URL already exists.",
+        errors: null,
+      });
     } else {
       if (isValid(fullURL)) {
         const shortURL = req.body.shortURL;
         const link = await queries.findLinkWhereShortURL(shortURL);
         if (link) {
-          res.render("duplicateURL");
+          res.render("submitLinks", {
+            errors: null,
+            error:
+              "This short URL is already in use. Please Enter a different URL or generate a random URL.",
+          });
         } else {
           await queries.createLinks(fullURL, shortURL);
           res.redirect("/");
         }
       } else {
         //return invalid url error
-        res.render("invalidURL");
+        res.render("submitLinks", { errors: null, error: "Invalid URL." });
       }
     }
   },
@@ -80,4 +93,14 @@ const getShortURL = async (req, res) => {
     res.redirect("/");
   }
 };
-module.exports = { postGenerateLinks, postSubmitLinks, getShortURL };
+const deleteLink = async (req, res) => {
+  const id = req.params.id;
+  await queries.deleteLink(id);
+  res.redirect("/");
+};
+module.exports = {
+  postGenerateLinks,
+  postSubmitLinks,
+  getShortURL,
+  deleteLink,
+};
