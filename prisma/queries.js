@@ -21,7 +21,19 @@ const findLinkWhereShortURL = async (shortURl) => {
     });
     return link;
   } catch (error) {
-    console.error("Error retrieving full URL");
+    console.error("Error retrieving short URL");
+  }
+};
+const findLinkWhereFullURL = async (fullURL) => {
+  try {
+    const link = await prisma.link.findFirst({
+      where: {
+        fullURL,
+      },
+    });
+    return link;
+  } catch (error) {
+    console.error("Error retrieving full url");
   }
 };
 const updateClicks = async (link) => {
@@ -40,5 +52,6 @@ module.exports = {
   createLinks,
   readLinks,
   findLinkWhereShortURL,
+  findLinkWhereFullURL,
   updateClicks,
 };

@@ -1,3 +1,4 @@
+const { body, validationResult } = require("express-validator");
 const queries = require("../prisma/queries");
 //generates a short unique string which will be used as short URL
 const short = require("short-uuid");
@@ -7,26 +8,51 @@ const isUrl = require("is-url");
 const isValid = (url) => {
   return isUrl(url);
 };
+// const isEmpty = "can not be empty.";
+// const validateURL=[
+//   body('fullURL').trim().not().isEmpty().withMessage(`fullURL ${isEmpty}`),
+//   body('shortURL').trim().not().isEmpty().withMessage(`shortURl ${isEmpty}`)
+// ]
 const postGenerateLinks = async (req, res) => {
   const fullURL = req.body.fullURL;
-  if (isValid(fullURL)) {
-    const shortURL = short.generate();
-    await queries.createLinks(fullURL, shortURL);
-    res.redirect("/");
+  const link = await queries.findLinkWhereFullURL(fullURL);
+  if (link) {
+    res.render("duplicateURL");
   } else {
-    //return invalid url error
-    res.redirect("/generateLinks");
+    if (isValid(fullURL)) {
+      let shortURL = short.generate();
+      const link = await queries.findLinkWhereShortURL(shortURL);
+      while (link) {
+        shortURL = short.generate();
+        link = await queries.findLinkWhereShortURL(shortURL);
+      }
+      await queries.createLinks(fullURL, shortURL);
+      res.redirect("/");
+    } else {
+      //return invalid url error
+      res.render("invalidURL");
+    }
   }
 };
 const postSubmitLinks = async (req, res) => {
   const fullURL = req.body.fullURL;
-  if (isValid(fullURL)) {
-    const shortURL = req.body.shortURL;
-    await queries.createLinks(fullURL, shortURL);
-    res.redirect("/");
+  const link = await queries.findLinkWhereFullURL(fullURL);
+  if (link) {
+    res.render("duplicateURL");
   } else {
-    //return invalid url error
-    res.redirect("/submitLinks");
+    if (isValid(fullURL)) {
+      const shortURL = req.body.shortURL;
+      const link = await queries.findLinkWhereShortURL(shortURL);
+      if (link) {
+        res.render("duplicateURL");
+      } else {
+        await queries.createLinks(fullURL, shortURL);
+        res.redirect("/");
+      }
+    } else {
+      //return invalid url error
+      res.render("invalidURL");
+    }
   }
 };
 const getShortURL = async (req, res) => {
