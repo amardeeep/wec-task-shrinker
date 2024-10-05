@@ -55,6 +55,34 @@ const deleteLink = async (id) => {
     },
   });
 };
+const getUser = async (userName) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      userName,
+    },
+  });
+  return user;
+};
+const getUserId = async (id) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+  return user;
+};
+const createUser = async (userName, password) => {
+  await prisma.user.create({
+    data: {
+      userName,
+      password,
+    },
+  });
+};
+const getUsers = async () => {
+  const users = await prisma.user.findMany();
+  return users;
+};
 module.exports = {
   createLinks,
   readLinks,
@@ -62,4 +90,8 @@ module.exports = {
   findLinkWhereFullURL,
   updateClicks,
   deleteLink,
+  getUser,
+  getUserId,
+  createUser,
+  getUsers,
 };
