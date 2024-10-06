@@ -6,9 +6,15 @@
     <title>Login</title>
   </head>
   <body>
+    <%if(error){%>
+    <div class="error">
+      <h2>Invalid details :</h2>
+      <h2><%=error[0]%></h2>
+    </div>
+    <%}%>
     <form action="/login" method="post">
-      <label for="userName">User Name :</label>
-      <input type="text" name="userName" id="userName" />
+      <label for="username">User Name :</label>
+      <input type="text" name="username" id="username" />
       <label for="password">Password : </label>
       <input type="password" name="password" id="password" />
       <button type="submit">Log In</button>

@@ -56,20 +56,28 @@ const deleteLink = async (id) => {
   });
 };
 const getUser = async (userName) => {
-  const user = await prisma.user.findUnique({
-    where: {
-      userName,
-    },
-  });
-  return user;
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        userName,
+      },
+    });
+    return user;
+  } catch (error) {
+    console.error(error);
+  }
 };
 const getUserId = async (id) => {
-  const user = await prisma.user.findUnique({
-    where: {
-      id,
-    },
-  });
-  return user;
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+    return user;
+  } catch (error) {
+    console.error(error);
+  }
 };
 const createUser = async (userName, password) => {
   await prisma.user.create({
@@ -80,8 +88,12 @@ const createUser = async (userName, password) => {
   });
 };
 const getUsers = async () => {
-  const users = await prisma.user.findMany();
-  return users;
+  try {
+    const users = await prisma.user.findMany();
+    return users;
+  } catch (error) {
+    console.error(error);
+  }
 };
 module.exports = {
   createLinks,
@@ -94,4 +106,5 @@ module.exports = {
   getUserId,
   createUser,
   getUsers,
+  prisma,
 };
