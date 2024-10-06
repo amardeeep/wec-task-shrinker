@@ -3,15 +3,29 @@ const queries = require("../prisma/queries");
 const controllers = require("../controllers/homeControllers");
 const homeRouter = Router();
 homeRouter.get("/", async (req, res) => {
-  const links = await queries.readLinks();
   const user = req.user;
-  res.render("home", { links, user });
+  if (user) {
+    const links = await queries.readLinks(user.id);
+    res.render("home", { links, user });
+  } else {
+    res.render("home", { links: null, user });
+  }
 });
 homeRouter.get("/generateLinks", (req, res) => {
-  res.render("generateLinks", { errors: null, error: null });
+  const user = req.user;
+  if (user) {
+    res.render("generateLinks", { errors: null, error: null });
+  } else {
+    res.render("home", { links: null, user: null });
+  }
 });
 homeRouter.get("/submitLinks", (req, res) => {
-  res.render("submitLinks", { errors: null, error: null });
+  const user = req.user;
+  if (user) {
+    res.render("submitLinks", { errors: null, error: null });
+  } else {
+    res.render("home", { links: null, user: null });
+  }
 });
 homeRouter.get("/:shortURL/shortURL", controllers.getShortURL);
 homeRouter.get("/:id/delete", controllers.deleteLink);

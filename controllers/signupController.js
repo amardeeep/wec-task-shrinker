@@ -34,7 +34,7 @@ const postUser = [
     bcrypt.hash(password, 10, async (err, hashedPassword) => {
       await queries.createUser(userName, hashedPassword);
     });
-    res.redirect("/");
+    res.redirect("/login");
   },
 ];
 

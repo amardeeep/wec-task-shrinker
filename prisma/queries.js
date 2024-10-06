@@ -1,15 +1,20 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-const createLinks = async (fullURL, shortURL) => {
+const createLinks = async (fullURL, shortURL, userId) => {
   await prisma.link.create({
     data: {
       fullURL,
       shortURL,
+      userId,
     },
   });
 };
-const readLinks = async () => {
-  const links = await prisma.link.findMany();
+const readLinks = async (userId) => {
+  const links = await prisma.link.findMany({
+    where: {
+      userId,
+    },
+  });
   return links;
 };
 const findLinkWhereShortURL = async (shortURl) => {

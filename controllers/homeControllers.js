@@ -9,12 +9,15 @@ const isValid = (url) => {
   return isUrl(url);
 };
 const isEmpty = "can not be empty.";
-const validateURL = [
+const validateSubmitURL = [
   body("fullURL").trim().not().isEmpty().withMessage(`Full URL ${isEmpty}`),
   body("shortURL").trim().not().isEmpty().withMessage(`Short URL ${isEmpty}`),
 ];
+const validateGenerateURL = [
+  body("fullURL").trim().not().isEmpty().withMessage(`Full URL ${isEmpty}`),
+];
 const postGenerateLinks = [
-  validateURL,
+  validateGenerateURL,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -37,7 +40,8 @@ const postGenerateLinks = [
           shortURL = short.generate();
           link = await queries.findLinkWhereShortURL(shortURL);
         }
-        await queries.createLinks(fullURL, shortURL);
+        const userId = req.user.id;
+        await queries.createLinks(fullURL, shortURL, userId);
         res.redirect("/");
       } else {
         //return invalid url error
@@ -47,7 +51,7 @@ const postGenerateLinks = [
   },
 ];
 const postSubmitLinks = [
-  validateURL,
+  validateSubmitURL,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -74,7 +78,8 @@ const postSubmitLinks = [
               "This short URL is already in use. Please Enter a different URL or generate a random URL.",
           });
         } else {
-          await queries.createLinks(fullURL, shortURL);
+          const userId = req.user.id;
+          await queries.createLinks(fullURL, shortURL, userId);
           res.redirect("/");
         }
       } else {

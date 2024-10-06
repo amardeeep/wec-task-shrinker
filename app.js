@@ -69,6 +69,14 @@ app.post(
     failureMessage: true,
   })
 );
+app.get("/logout", (req, res, next) => {
+  req.logOut((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
 app.get("/signup", (req, res) => {
   res.render("signup");
 });
