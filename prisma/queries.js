@@ -17,11 +17,12 @@ const readLinks = async (userId) => {
   });
   return links;
 };
-const findLinkWhereShortURL = async (shortURl) => {
+const findLinkWhereShortURL = async (shortURl, userId) => {
   try {
     const link = await prisma.link.findFirst({
       where: {
         shortURL: shortURl,
+        userId,
       },
     });
     return link;
@@ -29,11 +30,12 @@ const findLinkWhereShortURL = async (shortURl) => {
     console.error("Error retrieving short URL");
   }
 };
-const findLinkWhereFullURL = async (fullURL) => {
+const findLinkWhereFullURL = async (fullURL, userId) => {
   try {
     const link = await prisma.link.findFirst({
       where: {
         fullURL,
+        userId,
       },
     });
     return link;

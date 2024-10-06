@@ -26,7 +26,8 @@ const postGenerateLinks = [
         .render("generateLinks", { errors: errors.array(), error: null });
     }
     const fullURL = req.body.fullURL;
-    const link = await queries.findLinkWhereFullURL(fullURL);
+    const userId = req.user.id;
+    const link = await queries.findLinkWhereFullURL(fullURL, userId);
     if (link) {
       res.render("generateLinks", {
         errors: null,
@@ -40,7 +41,6 @@ const postGenerateLinks = [
           shortURL = short.generate();
           link = await queries.findLinkWhereShortURL(shortURL);
         }
-        const userId = req.user.id;
         await queries.createLinks(fullURL, shortURL, userId);
         res.redirect("/");
       } else {
@@ -60,9 +60,9 @@ const postSubmitLinks = [
         .render("submitLinks", { errors: errors.array(), error: null });
     }
     const fullURL = req.body.fullURL;
-    const link = await queries.findLinkWhereFullURL(fullURL);
+    const userId = req.user.id;
+    const link = await queries.findLinkWhereFullURL(fullURL, userId);
     if (link) {
-      // res.render("duplicateURL");
       res.render("submitLinks", {
         error: "This Full URL already exists.",
         errors: null,
@@ -70,7 +70,7 @@ const postSubmitLinks = [
     } else {
       if (isValid(fullURL)) {
         const shortURL = req.body.shortURL;
-        const link = await queries.findLinkWhereShortURL(shortURL);
+        const link = await queries.findLinkWhereShortURL(shortURL, userId);
         if (link) {
           res.render("submitLinks", {
             errors: null,
@@ -78,7 +78,6 @@ const postSubmitLinks = [
               "This short URL is already in use. Please Enter a different URL or generate a random URL.",
           });
         } else {
-          const userId = req.user.id;
           await queries.createLinks(fullURL, shortURL, userId);
           res.redirect("/");
         }

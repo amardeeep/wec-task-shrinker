@@ -7,7 +7,9 @@
   </head>
   <body>
     <%if(user){%>
-    <div class="greetings"></div>
+    <div class="greetings">
+      Welcome back <%=user.userName %> <a href="logout">Logout</a>
+    </div>
     <div class="shortenURL">
       <a href="/generateLinks">Generate a Short URL.</a>
       <a href="/submitLinks">Add Custom short URL.</a>
@@ -33,9 +35,37 @@
       <% } %>
     </div>
     <%}else{%>
-    <div class="nav"></div>
-    <div class="homeContent"></div>
-    <div class="footer"></div>
+    <div class="nav">
+      <a href="login">Login</a>
+      <a href="signup">Sign Up</a>
+    </div>
+    <div class="homeContent">
+      Shrinker
+      <p>
+        A simple and efficient way to shrink and manage your favorite URLs.
+        <a href="signup">Sign Up</a> Now to get started.
+      </p>
+      <ul>
+        <li>
+          Easy to use. Just paste the URL in the form and click on generate to
+          randomly generate a short URL.
+          <div class="img"></div>
+        </li>
+        <li>
+          Give a name of your choosing by pasting it in the form and submit the
+          form. Easy and convenient.
+          <div class="img"></div>
+        </li>
+        <li>
+          Secured using passport.js so that your data stays secure no matter
+          what.
+          <div class="img"></div>
+        </li>
+      </ul>
+    </div>
+    <div class="footer">
+      Made By : <a href="https://github.com/amardeeep">Amardeep</a>
+    </div>
     <%}%>
   </body>
 </html>
