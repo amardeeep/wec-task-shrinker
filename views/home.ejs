@@ -2,14 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/output.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
   </head>
   <body>
     <%if(user){%>
-    <div class="greetings">
-      Welcome back <%=user.userName %> <a href="logout">Logout</a>
-    </div>
+    <div>Welcome back <%=user.userName %> <a href="logout">Logout</a></div>
     <div class="shortenURL">
       <a href="/generateLinks">Generate a Short URL.</a>
       <a href="/submitLinks">Add Custom short URL.</a>

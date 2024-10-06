@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build:css": "tailwindcss -i ./public/styles.css -o ./public/output.css --watch",
     "devStart": "nodemon app.js"
   },
   "author": "",
@@ -26,6 +27,9 @@
     "short-uuid": "^5.2.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "autoprefixer": "^10.4.20",
+    "nodemon": "^3.1.7",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13"
   }
 }
