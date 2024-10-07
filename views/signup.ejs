@@ -3,18 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="/signup.css" />
     <title>Sign Up</title>
   </head>
   <body>
     <form action="/signup" method="post">
-      <label for="userName">User Name :</label>
-      <input type="text" name="userName" id="userName" />
-      <label for="password">Password : </label>
-      <input type="password" name="password" id="password" />
-      <label for="cpassword">Confirm Password :</label>
-      <input type="password" name="cpassword" id="cpassword" />
-      <button type="submit">Sign Up</button>
-      <a href="/"><button type="button">Go Back</button></a>
+      <div class="img">
+        <img src="logo.png" alt="Logo Image" />
+      </div>
+      <div class="signupContent">
+        <h2>Sign Up</h2>
+        <input
+          type="text"
+          name="userName"
+          id="userName"
+          placeholder="User Name(E-Mail)"
+        />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Password"
+        />
+        <input
+          type="password"
+          name="cpassword"
+          id="cpassword"
+          placeholder="Confrim Password"
+        />
+        <div class="signupButtons">
+          <button type="submit">Sign Up</button>
+          <a href="/"><button type="button">Go Back</button></a>
+        </div>
+      </div>
     </form>
   </body>
 </html>
