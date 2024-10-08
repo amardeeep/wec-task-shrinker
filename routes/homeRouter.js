@@ -6,27 +6,41 @@ homeRouter.get("/", async (req, res) => {
   const user = req.user;
   if (user) {
     const links = await queries.readLinks(user.id);
-    res.render("home", { links, user });
+    res.render("home", {
+      links,
+      user,
+      errorsS: null,
+      errorS: null,
+      errorG: null,
+      errorsG: null,
+    });
   } else {
-    res.render("home", { links: null, user });
+    res.render("home", {
+      links: null,
+      user,
+      errorsS: null,
+      errorS: null,
+      errorG: null,
+      errorsG: null,
+    });
   }
 });
-homeRouter.get("/generateLinks", (req, res) => {
-  const user = req.user;
-  if (user) {
-    res.render("generateLinks", { errors: null, error: null });
-  } else {
-    res.render("home", { links: null, user: null });
-  }
-});
-homeRouter.get("/submitLinks", (req, res) => {
-  const user = req.user;
-  if (user) {
-    res.render("submitLinks", { errors: null, error: null });
-  } else {
-    res.render("home", { links: null, user: null });
-  }
-});
+// homeRouter.get("/generateLinks", (req, res) => {
+//   const user = req.user;
+//   if (user) {
+//     res.render("generateLinks", { errors: null, error: null });
+//   } else {
+//     res.render("home", { links: null, user: null });
+//   }
+// });
+// homeRouter.get("/submitLinks", (req, res) => {
+//   const user = req.user;
+//   if (user) {
+//     res.render("submitLinks", { errors: null, error: null });
+//   } else {
+//     res.render("home", { links: null, user: null });
+//   }
+// });
 homeRouter.get("/:shortURL/shortURL", controllers.getShortURL);
 homeRouter.get("/:id/delete", controllers.deleteLink);
 homeRouter.post("/submitLinks", controllers.postSubmitLinks);

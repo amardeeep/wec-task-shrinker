@@ -11,8 +11,45 @@
     <%if(user){%>
     <div>Welcome back <%=user.userName %> <a href="logout">Logout</a></div>
     <div class="shortenURL">
-      <a href="/generateLinks">Generate a Short URL.</a>
-      <a href="/submitLinks">Add Custom short URL.</a>
+      <p>Generate a Short URL.</p>
+      <form action="/generateLinks" method="post">
+        <% if(errorsG) {%>
+        <ul>
+          <% for(let error of errorsG) {%>
+          <li><%=error.msg %></li>
+          <% } %>
+        </ul>
+        <% } %>
+        <input
+          type="text"
+          name="fullURL"
+          id="fullURL"
+          placeholder="Full URL "
+        />
+        <button type="submit">Generate</button>
+      </form>
+      <p>Add Custom short URL.</p>
+      <form action="/submitLinks" method="post">
+        <div class="error">
+          <% if(errorsS) {%>
+          <ul>
+            <% for(let error of errorsS) {%>
+            <li><%=error.msg %></li>
+            <% } %>
+          </ul>
+          <% } %> <% if(errorS) {%>
+          <p><%=errorS %></p>
+          <% } %>
+        </div>
+        <input type="text" name="fullURL" id="fullURL" placeholder="Full URL" />
+        <input
+          type="text"
+          name="shortURL"
+          id="shortURL"
+          placeholder="Short URl"
+        />
+        <button type="submit">Submit</button>
+      </form>
     </div>
     <div class="links">
       <%if(links){ %> LINKS :

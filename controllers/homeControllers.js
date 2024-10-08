@@ -20,18 +20,29 @@ const postGenerateLinks = [
   validateGenerateURL,
   async (req, res) => {
     const errors = validationResult(req);
+    const user = req.user;
+    const links = await queries.readLinks(user.id);
     if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .render("generateLinks", { errors: errors.array(), error: null });
+      return res.status(400).render("home", {
+        errorsG: errors.array(),
+        errorG: null,
+        user,
+        links,
+        errorsS: null,
+        errorS: null,
+      });
     }
     const fullURL = req.body.fullURL;
     const userId = req.user.id;
     const link = await queries.findLinkWhereFullURL(fullURL, userId);
     if (link) {
-      res.render("generateLinks", {
-        errors: null,
-        error: "This Full URL already exists.",
+      res.render("home", {
+        errorsG: null,
+        errorG: "This URL already exists.",
+        errorsS: null,
+        errorS: null,
+        links,
+        user,
       });
     } else {
       if (isValid(fullURL)) {
@@ -45,7 +56,14 @@ const postGenerateLinks = [
         res.redirect("/");
       } else {
         //return invalid url error
-        res.render("generateLinks", { errors: null, error: "Invalid URL" });
+        res.render("home", {
+          user,
+          links,
+          errorsG: null,
+          errorG: "Invalid URL",
+          errorS: null,
+          errorsS: null,
+        });
       }
     }
   },
@@ -54,28 +72,44 @@ const postSubmitLinks = [
   validateSubmitURL,
   async (req, res) => {
     const errors = validationResult(req);
+    const user = req.user;
+    const links = await queries.readLinks(user.id);
     if (!errors.isEmpty()) {
       return res
         .status(400)
-        .render("submitLinks", { errors: errors.array(), error: null });
+        .render("home", {
+          errorsS: errors.array(),
+          errorS: null,
+          links,
+          user,
+          errorG: null,
+          errorsG: null,
+        });
     }
     const fullURL = req.body.fullURL;
     const userId = req.user.id;
     const link = await queries.findLinkWhereFullURL(fullURL, userId);
     if (link) {
-      res.render("submitLinks", {
-        error: "This Full URL already exists.",
-        errors: null,
+      res.render("home", {
+        errorS: "This URL already exists.",
+        errorsS: null,
+        links,
+        user,
+        errorG: null,
+        errorsG: null,
       });
     } else {
       if (isValid(fullURL)) {
         const shortURL = req.body.shortURL;
         const link = await queries.findLinkWhereShortURL(shortURL, userId);
         if (link) {
-          res.render("submitLinks", {
-            errors: null,
-            error:
-              "This short URL is already in use. Please Enter a different URL or generate a random URL.",
+          res.render("home", {
+            errorsS: null,
+            errorS: "This short URL is already in use.",
+            links,
+            user,
+            errorG: null,
+            errorsG: null,
           });
         } else {
           await queries.createLinks(fullURL, shortURL, userId);
@@ -83,7 +117,12 @@ const postSubmitLinks = [
         }
       } else {
         //return invalid url error
-        res.render("submitLinks", { errors: null, error: "Invalid URL." });
+        res.render("home", {
+          errors: null,
+          error: "Invalid URL.",
+          links,
+          user,
+        });
       }
     }
   },
