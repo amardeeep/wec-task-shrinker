@@ -78,3 +78,8 @@ form{
     border-color: blue;
     outline: none;
 }
+.error{
+    color: red;
+    font-weight: 200;
+    text-align: center;
+}

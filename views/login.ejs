@@ -8,24 +8,16 @@
     <title>Login</title>
   </head>
   <body>
-    <%if(error){%>
-    <div class="error">
-      <h2>Invalid details :</h2>
-      <h2><%=error[0]%></h2>
-    </div>
-    <%}%>
     <form action="/login" method="post">
       <div class="img">
         <img src="logo.png" alt="Logo Image" />
       </div>
       <div class="loginContent">
         <h2>Login</h2>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          placeholder="User Name(E-Mail)"
-        />
+        <%if(error){%>
+        <p class="error">Invalid Details:<%=error[0] %></p>
+        <%}%>
+        <input type="text" name="username" id="username" placeholder="E-Mail" />
         <input
           type="password"
           name="password"

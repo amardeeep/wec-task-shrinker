@@ -4,7 +4,7 @@ const queries = require("../prisma/queries");
 const emptyErr = "Can not be empty.";
 
 const passwordErr =
-  "is weak. Should atleast be 8 characters long and must have 1 number, 1 symbol, 1 Uppercase letter and 1 Lowercase letter";
+  "is weak.(Min-Length: 8,Number,Symbol,Uppercase,Lowercase:1)";
 const confirmPassowrdErr = "does not match password.";
 const validateUser = [
   body("userName").trim().not().isEmpty().withMessage(`Username ${emptyErr}`),

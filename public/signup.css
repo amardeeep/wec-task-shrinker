@@ -78,3 +78,15 @@ form{
     border-color: blue;
     outline: none;
 }
+.error{
+    color: red;
+    font-weight: 200;
+    text-align: center;
+    font-size: small;
+}
+.errorContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}

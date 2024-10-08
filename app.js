@@ -78,7 +78,7 @@ app.get("/logout", (req, res, next) => {
   });
 });
 app.get("/signup", (req, res) => {
-  res.render("signup");
+  res.render("signup", { errors: null });
 });
 app.post("/signup", signupController.postUser);
 app.use("/", homeRouter);

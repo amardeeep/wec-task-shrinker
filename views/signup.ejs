@@ -14,24 +14,62 @@
       </div>
       <div class="signupContent">
         <h2>Sign Up</h2>
-        <input
-          type="text"
-          name="userName"
-          id="userName"
-          placeholder="User Name(E-Mail)"
-        />
+        <% if(errors) {%>
+        <div class="errorContainer">
+          <input
+            type="text"
+            name="userName"
+            id="userName"
+            placeholder="E-Mail"
+          />
+          <% for(let error of errors){ %> <% if(error.path=='userName') {%>
+          <p class="error"><%=error.msg %></p>
+          <% } }%>
+        </div>
+
+        <div class="errorContainer">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+          />
+          <% for(let error of errors){ %> <% if(error.path=='password'){ %>
+          <p class="error"><%=error.msg %></p>
+          <% }} %>
+        </div>
+
+        <div class="errorContainer">
+          <input
+            type="password"
+            name="cpassword"
+            id="cpassword"
+            placeholder="Confrim Password"
+          />
+          <% for(let error of errors){ %> <% if(error.path=='cpassword') {%>
+          <p class="error"><%=error.msg %></p>
+
+          <% }} %>
+        </div>
+        <%} else{ %>
+
+        <input type="text" name="userName" id="userName" placeholder="E-Mail" />
+
         <input
           type="password"
           name="password"
           id="password"
           placeholder="Password"
         />
+
         <input
           type="password"
           name="cpassword"
           id="cpassword"
           placeholder="Confrim Password"
         />
+        <% } %>
+
         <div class="signupButtons">
           <button type="submit">Sign Up</button>
           <a href="/"><button type="button">Go Back</button></a>
