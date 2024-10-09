@@ -9,7 +9,9 @@
   </head>
   <body>
     <%if(user){%>
-    <div>Welcome back <%=user.userName %> <a href="logout">Logout</a></div>
+    <div class="greetings">
+      Welcome back <%=user.userName %> <a href="logout">Logout</a>
+    </div>
     <div class="shortenURL">
       <p>Generate a Short URL.</p>
       <form action="/generateLinks" method="post">
@@ -52,17 +54,23 @@
       </form>
     </div>
     <div class="links">
-      <%if(links){ %> LINKS :
-      <ul>
+      <h2>Your Saved Links</h2>
+      <%if(links){ %>
+      <ul class="linksul">
         <% for(let link of links){ %>
         <li>
-          <div class="full">
+          <div class="full linkSection">
+            <div class="identifiers">Full URL</div>
             <a href="<%=link.fullURL%>"><%=link.fullURL%></a>
           </div>
-          <div class="short">
+          <div class="short linkSection">
+            <div class="identifiers">Short URL</div>
             <a href="<%=link.shortURL%>/shortURL"><%=link.shortURL%></a>
           </div>
-          <div class="clicks"><%=link.clicks%></div>
+          <div class="clicks linkSection">
+            <div class="identifiers">Visits</div>
+            <%=link.clicks%>
+          </div>
           <div class="delete">
             <a href="<%=link.id%>/delete">Delete</a>
           </div>
@@ -70,6 +78,9 @@
         <% } %>
       </ul>
       <% } %>
+    </div>
+    <div class="footer">
+      Made By <a href="https://github.com/amardeeep"> Amardeep</a>
     </div>
     <%}else{%>
     <div class="nav">

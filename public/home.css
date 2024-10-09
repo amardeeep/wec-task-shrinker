@@ -64,5 +64,71 @@ body{
     text-decoration: underline;
 }
 
-
+.greetings{
+    flex-basis: 5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    font-size: 25px;
+    background-color: black;
+    color: white;
+}
+.shortenURL{
+    flex-basis: 10vh;
+}
+.links{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    width: 100%;
+    background-color: #f5f6f7;
+}
+.linksul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 60%;
+    min-height: 10vh;
+    padding: 10px;
+    gap:20px
+}
+.linksul li{
+    list-style-type: none;
+    box-shadow: 4px 4px 5px #a0a0a3;
+    padding: 10px;
+    background-color: white;
+    border: 3px solid black;
+    min-width: 60%;
+}
+.identifiers{
+    font-weight: 800;
+    flex-basis:15% ;
+}
+.linkSection{
+    display: flex;
+    flex-direction: row;
+}
+.links h2{
+    text-align: center;
+}
+.links a{
+    padding: 2px;
+    color: black;
+    text-decoration: none;
+}
+.links a:hover{
+    color:blue
+}
+.delete a:hover{
+    color: red;
+}
+.delete{
+    text-align: center;
+}
 
