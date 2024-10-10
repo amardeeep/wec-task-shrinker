@@ -278,7 +278,7 @@ body{
     color: red;
 }
 .greetings a{
-    color: blue;
+    color: lightblue;
     text-decoration: none;
 }
 .greetings a:hover{

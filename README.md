@@ -1,1 +1,3 @@
-# wec-task-shrinker
+# Shrinkr
+
+## Description
