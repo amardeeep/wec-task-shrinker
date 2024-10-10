@@ -25,7 +25,7 @@
       <!-- Section for URL generation and submission -->
       <div class="generateDiv">
         <!-- Form to generate short URLs -->
-        <h2>GENERATE SHORT URL</h2>
+        <h2>GENERATE A RANDOM SHORT URL</h2>
         <div class="error">
           <!-- Display error messages for URL generation -->
           <% if(errorsG) {%>
@@ -54,7 +54,8 @@
       </div>
       <div class="submitDiv">
         <!-- Form to submit custom short URLs -->
-        <h2>ADD SHORT URL</h2>
+        <!-- <h2 class="or">OR</h2> -->
+        <h2>ADD A SHORT URL</h2>
         <div class="error">
           <!-- Display error messages for URL submission -->
           <% if(errorsS) {%>
@@ -124,7 +125,7 @@
     </div>
     <div class="footer">
       <!-- Footer section -->
-      Made By <a href="https://github.com/amardeeep"> Amardeep</a>
+      Made By :<a href="https://github.com/amardeeep"> Amardeep</a>
       <!-- Developer credit -->
     </div>
     <%}else{%>
@@ -140,37 +141,44 @@
     </div>
     <div class="homeContent">
       <!-- Content for the homepage -->
-      <p>
-        A simple and efficient way to shrink and manage your favorite URLs.
-        <a href="signup">Sign Up</a> Now to get started.
-      </p>
+      <h3>
+        A simple and efficient way to shrink and manage your favorite URLs. To
+        get started, Create your free account <a href="signup">here</a>.
+      </h3>
       <ul>
         <li>
-          Easy to use. Just paste the URL in the form and click on generate to
-          randomly generate a short URL.
+          <div class="img">
+            <img
+              src="image.png"
+              alt="Illustration on How to generate a random short URL."
+            />
+          </div>
+          <!-- Placeholder for an image -->
+          <p>
+            Easy to use. Just paste the URL in the form and click on generate to
+            randomly generate a short URL.
+          </p>
           <!-- Description of URL generation -->
-          <div class="img"></div>
-          <!-- Placeholder for an image -->
         </li>
         <li>
-          Give a name of your choosing by pasting it in the form and submit the
-          form. Easy and convenient.
+          <p>
+            Give a name of your choosing by pasting it in the form and submit
+            the form. Easy and convenient.
+          </p>
           <!-- Description of custom URL submission -->
-          <div class="img"></div>
-          <!-- Placeholder for an image -->
-        </li>
-        <li>
-          Secured using passport.js so that your data stays secure no matter
-          what.
-          <!-- Description of security features -->
-          <div class="img"></div>
+          <div class="img">
+            <img
+              src="image1.png"
+              alt="Illustration on How to add a custom URL."
+            />
+          </div>
           <!-- Placeholder for an image -->
         </li>
       </ul>
     </div>
     <div class="footer">
       <!-- Footer section for unauthenticated users -->
-      Made By <a href="https://github.com/amardeeep"> Amardeep</a>
+      Made By : <a href="https://github.com/amardeeep"> Amardeep</a>
       <!-- Developer credit -->
     </div>
     <%}%>
