@@ -278,14 +278,14 @@ body{
     color: red;
 }
 .greetings a{
-    color: lightblue;
+    color: blue;
     text-decoration: none;
 }
 .greetings a:hover{
     text-decoration: underline;
 }
 .greetings span{
-    color: blue;
+    color: skyblue;
     font-weight: bold;
 }
 .greetings button{
