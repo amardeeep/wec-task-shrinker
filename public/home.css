@@ -134,7 +134,8 @@ body{
     padding: 10px;
     background-color: white;
     border: 3px solid black;
-    min-width: 60%;
+    width: 60%;
+
 }
 .identifiers{
     font-weight: 800;
