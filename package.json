@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build":"prisma generate",
+    
+    "build": "npm run migrate:deploy",
+    "migrate:deploy": "prisma migrate deploy",
+    "migrate:status": "prisma migrate status",
+    "generate": "prisma generate",
     "start": "node app.js"
   },
   "author": "",
