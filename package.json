@@ -4,11 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    
-    "build": "npm run migrate:deploy",
-    "migrate:deploy": "prisma migrate deploy",
-    "migrate:status": "prisma migrate status",
-    "generate": "prisma generate",
+    "build":"prisma generate",
     "start": "node app.js"
   },
   "author": "",
