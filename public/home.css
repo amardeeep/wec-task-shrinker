@@ -131,4 +131,149 @@ body{
 .delete{
     text-align: center;
 }
+.shortenURL{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+.generateForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 50%;
+}
+.generateDiv{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 5px;
+}
+.submitDiv .error ul{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.generateDiv input{
+    padding: 7px;
+    box-shadow: 2px 2px 5px black;
+    border: 2px black solid;
+    border-radius: 10px;
+    flex-basis: 70%;
+}
+.generateDiv input:hover{
+    box-shadow: 2px 2px 5px blue;
+    border: 2px blue solid;
+}
+.generateDiv input:focus{
+    box-shadow: 3px 3px 5px blue;
+    border: 3px blue solid;
+    outline: none;
+}
 
+.generateForm button{
+    flex-basis: 20%;
+    background-color: white;
+    color: #0039a6;
+    border:2px solid #0039a6;
+    border-radius: 5px;
+}
+.generateForm button:hover{
+    background-color: #0039a6;
+    color: white;
+}
+.generateDiv li{
+    list-style: none;
+    color: red;
+}
+.submitForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 50%;
+}
+.submitDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+.inputDiv{
+    display: flex;
+    flex-direction: row;
+    flex-basis: 70%;
+    justify-content: space-between;
+    gap: 10px;
+}
+.submitDiv input{
+    display: flex;
+    padding: 7px;
+    box-shadow: 2px 2px 5px black;
+    border: 2px black solid;
+    border-radius: 10px;
+    flex-basis: 50%;
+    flex-shrink: 1;
+}
+.submitDiv input:hover{
+    box-shadow: 2px 2px 5px blue;
+    border: 2px blue solid;
+}
+.submitDiv input:focus{
+    box-shadow: 3px 3px 5px blue;
+    border: 3px blue solid;
+    outline: none;
+}
+
+.submitForm button{
+    flex-basis: 20%;
+    background-color: white;
+    color: #0039a6;
+    border:2px solid #0039a6;
+    border-radius: 5px;
+}
+.submitForm button:hover{
+    background-color: #0039a6;
+    color: white;
+}
+.submitDiv li{
+    list-style: none;
+    color: red;
+}
+
+.errormsg{
+    color: red;
+}
+.greetings a{
+    color: blue;
+    text-decoration: none;
+}
+.greetings a:hover{
+    text-decoration: underline;
+}
+.greetings span{
+    color: blue;
+    font-weight: bold;
+}
+.greetings button{
+    padding:5px 20px ;
+    background-color: black;
+    border-radius: 5px;
+    border:3px solid white;
+    color: white;
+}
+.greetings button:hover{
+    color: black;
+    background-color: white;
+}
+.delete button{
+    color: red;
+    border: 2px solid red;
+    border-radius: 5px;
+    padding: 2px 15px;
+}
+.delete button:hover{
+    background-color: red;
+    color: white;
+}

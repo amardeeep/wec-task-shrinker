@@ -75,16 +75,14 @@ const postSubmitLinks = [
     const user = req.user;
     const links = await queries.readLinks(user.id);
     if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .render("home", {
-          errorsS: errors.array(),
-          errorS: null,
-          links,
-          user,
-          errorG: null,
-          errorsG: null,
-        });
+      return res.status(400).render("home", {
+        errorsS: errors.array(),
+        errorS: null,
+        links,
+        user,
+        errorG: null,
+        errorsG: null,
+      });
     }
     const fullURL = req.body.fullURL;
     const userId = req.user.id;
@@ -118,10 +116,12 @@ const postSubmitLinks = [
       } else {
         //return invalid url error
         res.render("home", {
-          errors: null,
-          error: "Invalid URL.",
+          errorsS: null,
+          errorS: "Invalid URL.",
           links,
           user,
+          errorsG: null,
+          errorG: null,
         });
       }
     }

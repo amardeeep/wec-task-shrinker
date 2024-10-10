@@ -3,76 +3,119 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="/home.css" />
+    <!-- Link to custom stylesheet for home page -->
     <link rel="stylesheet" href="/reset.css" />
+    <!-- Link to CSS reset stylesheet -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Responsive design -->
     <title>Dashboard</title>
+    <!-- Title of the page -->
   </head>
   <body>
     <%if(user){%>
+    <!-- Check if the user is logged in -->
     <div class="greetings">
-      Welcome back <%=user.userName %> <a href="logout">Logout</a>
+      <!-- Welcome message for logged-in users -->
+      <div>Welcome back <span><%=user.userName %> </span></div>
+      <!-- Display username -->
+      <a href="logout"><button>Logout</button></a>
+      <!-- Logout link -->
     </div>
     <div class="shortenURL">
-      <p>Generate a Short URL.</p>
-      <form action="/generateLinks" method="post">
-        <% if(errorsG) {%>
-        <ul>
-          <% for(let error of errorsG) {%>
-          <li><%=error.msg %></li>
-          <% } %>
-        </ul>
-        <% } %>
-        <input
-          type="text"
-          name="fullURL"
-          id="fullURL"
-          placeholder="Full URL "
-        />
-        <button type="submit">Generate</button>
-      </form>
-      <p>Add Custom short URL.</p>
-      <form action="/submitLinks" method="post">
+      <!-- Section for URL generation and submission -->
+      <div class="generateDiv">
+        <!-- Form to generate short URLs -->
+        <h2>GENERATE SHORT URL</h2>
         <div class="error">
+          <!-- Display error messages for URL generation -->
+          <% if(errorsG) {%>
+          <ul>
+            <% for(let error of errorsG) {%>
+            <li><%=error.msg %></li>
+            <!-- Display each error message -->
+            <% } %>
+          </ul>
+          <% } %> <% if(errorG) {%>
+          <p class="errormsg"><%=errorG %></p>
+          <!-- Display additional error message if exists -->
+          <% } %>
+        </div>
+        <form action="/generateLinks" method="post" class="generateForm">
+          <!-- Form submission to generate links -->
+          <input
+            type="text"
+            name="fullURL"
+            id="fullURL"
+            placeholder="FULL URL"
+          />
+          <button type="submit">Generate</button>
+          <!-- Button to submit the form -->
+        </form>
+      </div>
+      <div class="submitDiv">
+        <!-- Form to submit custom short URLs -->
+        <h2>ADD SHORT URL</h2>
+        <div class="error">
+          <!-- Display error messages for URL submission -->
           <% if(errorsS) {%>
           <ul>
             <% for(let error of errorsS) {%>
             <li><%=error.msg %></li>
+            <!-- Display each error message -->
             <% } %>
           </ul>
           <% } %> <% if(errorS) {%>
-          <p><%=errorS %></p>
+          <p class="errormsg"><%=errorS %></p>
+          <!-- Display additional error message if exists -->
           <% } %>
         </div>
-        <input type="text" name="fullURL" id="fullURL" placeholder="Full URL" />
-        <input
-          type="text"
-          name="shortURL"
-          id="shortURL"
-          placeholder="Short URl"
-        />
-        <button type="submit">Submit</button>
-      </form>
+        <form action="/submitLinks" method="post" class="submitForm">
+          <!-- Form submission to add short URL -->
+          <div class="inputDiv">
+            <input
+              type="text"
+              name="fullURL"
+              id="fullURL"
+              placeholder="YOUR FULL URL"
+            />
+            <input
+              type="text"
+              name="shortURL"
+              id="shortURL"
+              placeholder="ADD CUSTOM SHORT URL"
+            />
+          </div>
+          <button type="submit">Submit</button>
+          <!-- Button to submit the form -->
+        </form>
+      </div>
     </div>
     <div class="links">
+      <!-- Section to display saved links -->
       <h2>Your Saved Links</h2>
       <%if(links){ %>
+      <!-- Check if there are saved links -->
       <ul class="linksul">
         <% for(let link of links){ %>
         <li>
           <div class="full linkSection">
             <div class="identifiers">Full URL</div>
             <a href="<%=link.fullURL%>"><%=link.fullURL%></a>
+            <!-- Display full URL with a link -->
           </div>
           <div class="short linkSection">
             <div class="identifiers">Short URL</div>
             <a href="<%=link.shortURL%>/shortURL"><%=link.shortURL%></a>
+            <!-- Display short URL with a link -->
           </div>
           <div class="clicks linkSection">
             <div class="identifiers">Visits</div>
             <%=link.clicks%>
+            <!-- Display number of visits -->
           </div>
           <div class="delete">
-            <a href="<%=link.id%>/delete">Delete</a>
+            <a href="<%=link.id%>/delete"><button>Delete</button></a>
+            <!-- Link to delete the saved URL -->
           </div>
         </li>
         <% } %>
@@ -80,16 +123,23 @@
       <% } %>
     </div>
     <div class="footer">
+      <!-- Footer section -->
       Made By <a href="https://github.com/amardeeep"> Amardeep</a>
+      <!-- Developer credit -->
     </div>
     <%}else{%>
+    <!-- If the user is not logged in -->
     <div class="nav">
+      <!-- Navigation section for unauthenticated users -->
       <h1>Shrinkr</h1>
+      <!-- Application title -->
       <div class="linksHeader">
         <a href="login">Login</a> <a href="signup">Sign Up</a>
+        <!-- Links to login and signup -->
       </div>
     </div>
     <div class="homeContent">
+      <!-- Content for the homepage -->
       <p>
         A simple and efficient way to shrink and manage your favorite URLs.
         <a href="signup">Sign Up</a> Now to get started.
@@ -98,22 +148,30 @@
         <li>
           Easy to use. Just paste the URL in the form and click on generate to
           randomly generate a short URL.
+          <!-- Description of URL generation -->
           <div class="img"></div>
+          <!-- Placeholder for an image -->
         </li>
         <li>
           Give a name of your choosing by pasting it in the form and submit the
           form. Easy and convenient.
+          <!-- Description of custom URL submission -->
           <div class="img"></div>
+          <!-- Placeholder for an image -->
         </li>
         <li>
           Secured using passport.js so that your data stays secure no matter
           what.
+          <!-- Description of security features -->
           <div class="img"></div>
+          <!-- Placeholder for an image -->
         </li>
       </ul>
     </div>
     <div class="footer">
+      <!-- Footer section for unauthenticated users -->
       Made By <a href="https://github.com/amardeeep"> Amardeep</a>
+      <!-- Developer credit -->
     </div>
     <%}%>
   </body>
